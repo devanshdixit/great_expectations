@@ -18,4 +18,4 @@ jobs:
       with:
         algolia_application_id: 'RA3RRQUBO1'
         algolia_api_key: '5fc4b9cbb86b1510fd966ce24afb13a4'
-        file: 'algolia/my-algolia-config.json'
+        file: 'https://gist.github.com/devanshdixit/412b013be6eb6910f6563ad789366bfb'
