@@ -19,15 +19,9 @@ jobs:
 #         algolia_application_id: 'RA3RRQUBO1'
 #         algolia_api_key: '5fc4b9cbb86b1510fd966ce24afb13a4'
 #         file: 'https://gist.github.com/devanshdixit/412b013be6eb6910f6563ad789366bfb'
-    - uses: actions/checkout@v2
-
-    - name: Get the content of algolia.json as config
-      id: algolia_config
-      run: echo "::set-output name=config::$(cat config.json | jq -r tostring)"
-
     - name: Push indices to Algolia
       uses: signcl/docsearch-scraper-action@master
       env:
        APPLICATION_ID: 'RA3RRQUBO1'
        API_KEY: '5fc4b9cbb86b1510fd966ce24afb13a4'
-       CONFIG: '{ "index_name": "greatexpectations_trial_doc_try3","start_urls": ["https://docs.greatexpectations.io/docs/"],"sitemap_alternate_links": true,"selectors": { "lvl0": {"selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]","type": "xpath","global": true,"default_value": "Documentation"},"lvl1": "header h1","lvl2": "article h2", "lvl3": "article h3","lvl4": "article h4","lvl5": "article h5, article td:first-child", "lvl6": "article h6","text": "article p, article li, article td:last-child"}, "strip_chars": " .,;:#","custom_settings": { "separatorsToIndex": "_", "attributesForFaceting": [   "language", "version", "type", "docusaurus_tag"],  "attributesToRetrieve": ["hierarchy", "content", "anchor", "url", "url_without_anchor", "type"] },"conversation_id": [   "833762294"],  "nb_hits": 46250}'
+       CONFIG: '{"index_name": "docs","start_urls": ["https://example.com/"],"sitemap_urls": ["https://example.com/sitemap.xml"],"sitemap_alternate_links": true,"stop_urls": [],"selectors": {"lvl1": "header h1","lvl2": "article h2","lvl3": "article h3","lvl4": "article h4","lvl5": "article h5, article td:first-child","lvl6": "article h6","text": "article p, article li, article td:last-child"},"strip_chars": " .,;:#","custom_settings": {"separatorsToIndex": "_","attributesForFaceting": ["language","version","type","docusaurus_tag"],"attributesToRetrieve": ["hierarchy","content","anchor","url","url_without_anchor","type"]}}'
