@@ -12,21 +12,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: mkdir -p  ${{ github.workspace }}/config.json
+#     - uses: actions/upload-artifact@v2
+#       with:
+#         name: 'config file path'
+#         path: ${{ github.workspace }}/config.json
+    - name: Get the content of algolia.json as config
+      id: algolia_config
+      run: echo "::set-output name=config::$(cat ${{ github.workspace }}/config.json | jq -r tostring)"
 
-    - run: echo hello > ${{ github.workspace }}/config.json
-
-    - uses: actions/upload-artifact@v2
-      with:
-        name: 'config file path'
-        path: ${{ github.workspace }}/config.json
-#     - name: Get the content of algolia.json as config
-#       id: algolia_config
-#       run: echo "::set-output name=config::$(cat algolia.json | jq -r tostring)"
-
-#     - name: Push indices to Algolia
-#       uses: signcl/docsearch-scraper-action@master
-#       env:
-#         APPLICATION_ID: 'RA3RRQUBO1'
-#         API_KEY: '5fc4b9cbb86b1510fd966ce24afb13a4'
-#         CONFIG: ${{ steps.algolia_config.outputs.config }}
+    - name: Push indices to Algolia
+      uses: signcl/docsearch-scraper-action@master
+      env:
+        APPLICATION_ID: 'RA3RRQUBO1'
+        API_KEY: '5fc4b9cbb86b1510fd966ce24afb13a4'
+        CONFIG: ${{ github.workspace }}/config.json
