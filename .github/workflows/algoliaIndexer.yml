@@ -24,5 +24,5 @@ jobs:
       uses: signcl/docsearch-scraper-action@master
       env:
         APPLICATION_ID: 'RA3RRQUBO1'
-        API_KEY: '6ca7609789d2503c8ce189e5575c4936'
+        API_KEY: '5fc4b9cbb86b1510fd966ce24afb13a4'
         CONFIG: ${{ github.workspace }}/config.json
