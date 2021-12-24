@@ -12,13 +12,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: mkdir -p path/to/artifact
+    - run: mkdir -p  ${{ github.workspace }}/config.json
 
-    - run: echo hello > path/to/artifact/world.txt
+    - run: echo hello > ${{ github.workspace }}/config.json
 
     - uses: actions/upload-artifact@v2
       with:
-        name: ${{ github.workspace }}
+        name: 'config file path'
         path: ${{ github.workspace }}/config.json
 #     - name: Get the content of algolia.json as config
 #       id: algolia_config
