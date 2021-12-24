@@ -10,18 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-#     - uses: actions/checkout@v2
-#     - name: Build the Docker image
-#       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - uses: actions/checkout@v2
-    - uses: darrenjennings/algolia-docsearch-action@master
+
+    - run: mkdir -p path/to/artifact
+
+    - run: echo hello > path/to/artifact/world.txt
+
+    - uses: actions/upload-artifact@v2
       with:
-        algolia_application_id: 'RA3RRQUBO1'
-        algolia_api_key: '5fc4b9cbb86b1510fd966ce24afb13a4'
-        file: "${GITHUB_WORKSPACE}/config.json"
+        name: ${{ github.workspace }}
+        path: ${{ env.VERSION_MAJOR }}.${{ env.VERSION_MINOR }}
+#     - name: Get the content of algolia.json as config
+#       id: algolia_config
+#       run: echo "::set-output name=config::$(cat algolia.json | jq -r tostring)"
+
 #     - name: Push indices to Algolia
 #       uses: signcl/docsearch-scraper-action@master
 #       env:
-#        APPLICATION_ID: 'RA3RRQUBO1'
-#        API_KEY: '5fc4b9cbb86b1510fd966ce24afb13a4'
-#        CONFIG: '{"index_name": "docs","start_urls": ["https://docs.greatexpectations.io/docs/"],"sitemap_alternate_links": true,"stop_urls": [],"selectors": {"lvl1": "header h1","lvl2": "article h2","lvl3": "article h3","lvl4": "article h4","lvl5": "article h5, article td:first-child","lvl6": "article h6","text": "article p, article li, article td:last-child"},"strip_chars": " .,;:#","custom_settings": {"separatorsToIndex": "_","attributesForFaceting": ["language","version","type","docusaurus_tag"],"attributesToRetrieve": ["hierarchy","content","anchor","url","url_without_anchor","type"]}}'
+#         APPLICATION_ID: 'RA3RRQUBO1'
+#         API_KEY: '5fc4b9cbb86b1510fd966ce24afb13a4'
+#         CONFIG: ${{ steps.algolia_config.outputs.config }}
